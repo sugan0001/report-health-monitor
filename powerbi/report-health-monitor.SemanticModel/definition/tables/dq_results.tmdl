@@ -1,0 +1,83 @@
+table dq_results
+	lineageTag: 4471328f-4bd6-4cfe-9313-eeefaf8b4534
+
+	column run_id
+		dataType: string
+		lineageTag: 136b1ce7-caef-4b65-9906-62fe940c4e4b
+		summarizeBy: none
+		sourceColumn: run_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column run_timestamp
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f2d8dfc4-0fda-4e47-a701-0ac9285c35af
+		summarizeBy: none
+		sourceColumn: run_timestamp
+
+		annotation SummarizationSetBy = Automatic
+
+	column check_name
+		dataType: string
+		lineageTag: 09d1bbb5-5a79-4c5b-8e5c-5a25a3dfabe1
+		summarizeBy: none
+		sourceColumn: check_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column table_name
+		dataType: string
+		lineageTag: 3bc1006d-63bc-427c-a689-92dd0e16d24c
+		summarizeBy: none
+		sourceColumn: table_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column column_name
+		dataType: string
+		lineageTag: 1bc3ee24-e27d-48eb-a0ad-af61a383c3af
+		summarizeBy: none
+		sourceColumn: column_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column failed_count
+		dataType: int64
+		formatString: 0
+		lineageTag: a947bf5e-46b0-44a1-9be6-16f29688da82
+		summarizeBy: sum
+		sourceColumn: failed_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 81073f19-91b1-4210-a92f-5b7e4478059e
+		summarizeBy: sum
+		sourceColumn: total_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: 7546e539-1f3f-403a-8068-f7ac3c5dd501
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dq_results = m
+		mode: import
+		source =
+				let
+				    Source = DatabricksMultiCloud.Catalogs("dbc-200018d7-3dc3.cloud.databricks.com", "/sql/1.0/warehouses/60af7a48efc2513b", [Catalog=null, Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation="2.0", Protocol=null]),
+				    workspace_Database = Source{[Name="workspace",Kind="Database"]}[Data],
+				    dq_Schema = workspace_Database{[Name="dq",Kind="Schema"]}[Data],
+				    dq_results_Table = dq_Schema{[Name="dq_results",Kind="Table"]}[Data]
+				in
+				    dq_results_Table
+
+	annotation PBI_ResultType = Table
+

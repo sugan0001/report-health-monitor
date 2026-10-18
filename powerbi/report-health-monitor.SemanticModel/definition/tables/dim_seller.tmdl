@@ -1,0 +1,38 @@
+table dim_seller
+	lineageTag: 9aa24ec0-0c4e-405f-8c3a-31ea85860c54
+
+	column seller_id
+		dataType: string
+		lineageTag: 0a488383-e34a-42e6-842e-3ad26862ea7c
+		summarizeBy: none
+		sourceColumn: seller_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column seller_city
+		dataType: string
+		lineageTag: c796d1b8-c5c8-487a-9595-0ae9490762c0
+		summarizeBy: none
+		sourceColumn: seller_city
+
+		annotation SummarizationSetBy = Automatic
+
+	column seller_state
+		dataType: string
+		lineageTag: 8c9e638d-2935-4bf5-8168-37580e06bd32
+		summarizeBy: none
+		sourceColumn: seller_state
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_seller = m
+		mode: import
+		source =
+				let
+				    Source = DatabricksMultiCloud.Catalogs("dbc-200018d7-3dc3.cloud.databricks.com", "/sql/1.0/warehouses/60af7a48efc2513b", [Catalog=null, Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation="2.0", Protocol=null]),
+				    workspace_Database = Source{[Name="workspace",Kind="Database"]}[Data],
+				    gold_Schema = workspace_Database{[Name="gold",Kind="Schema"]}[Data],
+				    dim_seller_Table = gold_Schema{[Name="dim_seller",Kind="Table"]}[Data]
+				in
+				    dim_seller_Table
+

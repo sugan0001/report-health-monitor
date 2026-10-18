@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "report-health-monitor"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "bee3e891-7d20-4e87-8061-a3e6b46970e1"
+  }
+}

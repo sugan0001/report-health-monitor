@@ -1,0 +1,134 @@
+table fact_orders
+	lineageTag: 5500922f-d037-409f-832e-a805dd84428a
+
+	column order_id
+		dataType: string
+		lineageTag: a2ac918a-e938-4e70-9432-e456f09cd3d4
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_item_id
+		dataType: int64
+		formatString: 0
+		lineageTag: e35987a7-0ef8-4fa8-a472-65d746b95285
+		summarizeBy: sum
+		sourceColumn: order_item_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_id
+		dataType: string
+		lineageTag: 0430e779-4ebd-456f-9a16-bdc440bc20f0
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_id
+		dataType: string
+		lineageTag: e06340ff-790a-40d5-bcd3-87af36f723b4
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column seller_id
+		dataType: string
+		lineageTag: 4bd8fc91-96cc-4680-8b21-ebd36e5d45e1
+		summarizeBy: none
+		sourceColumn: seller_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 43976d39-644f-4a1c-be79-333d0c18605e
+		summarizeBy: none
+		sourceColumn: order_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column order_status
+		dataType: string
+		lineageTag: 01e6218a-a343-4031-aff8-ccb0d6fbf094
+		summarizeBy: none
+		sourceColumn: order_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column price
+		dataType: double
+		lineageTag: 46a4afc0-3314-49b7-9e26-4baf66ee185b
+		summarizeBy: sum
+		sourceColumn: price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column freight_value
+		dataType: double
+		lineageTag: a187c1ed-4971-4f91-a89c-f832ee2049d3
+		summarizeBy: sum
+		sourceColumn: freight_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column delivered_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d5478bfc-c4a7-44a2-83db-f1da22f67674
+		summarizeBy: none
+		sourceColumn: delivered_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column estimated_delivery_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 5e98820a-e1a2-402e-88d2-13d5ef7470f6
+		summarizeBy: none
+		sourceColumn: estimated_delivery_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column is_delivered
+		dataType: int64
+		formatString: 0
+		lineageTag: 80d4dd4d-7c0b-42ea-b456-2498674bc1c0
+		summarizeBy: sum
+		sourceColumn: is_delivered
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_on_time
+		dataType: int64
+		formatString: 0
+		lineageTag: e607bf3e-0472-45b2-a8dd-ade30a150384
+		summarizeBy: sum
+		sourceColumn: is_on_time
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_orders = m
+		mode: import
+		source =
+				let
+				    Source = DatabricksMultiCloud.Catalogs("dbc-200018d7-3dc3.cloud.databricks.com", "/sql/1.0/warehouses/60af7a48efc2513b", [Catalog=null, Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation="2.0", Protocol=null]),
+				    workspace_Database = Source{[Name="workspace",Kind="Database"]}[Data],
+				    gold_Schema = workspace_Database{[Name="gold",Kind="Schema"]}[Data],
+				    fact_orders_Table = gold_Schema{[Name="fact_orders",Kind="Table"]}[Data]
+				in
+				    fact_orders_Table
+

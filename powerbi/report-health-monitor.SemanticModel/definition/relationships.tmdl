@@ -1,0 +1,16 @@
+relationship AutoDetected_30d37920-fd66-4e16-b99b-b5469da64984
+	fromColumn: fact_orders.customer_id
+	toColumn: dim_customer.customer_id
+
+relationship AutoDetected_31c39a62-9093-4a4d-bc26-4d8797e7ec2d
+	fromColumn: fact_orders.product_id
+	toColumn: dim_product.product_id
+
+relationship AutoDetected_f6f664c3-8b8b-4e0e-b8b5-722b78811f69
+	fromColumn: fact_orders.seller_id
+	toColumn: dim_seller.seller_id
+
+relationship d7f3d7bd-3138-4981-64b1-2ea09d4d3a2d
+	fromColumn: fact_orders.order_date
+	toColumn: dim_date.date
+
